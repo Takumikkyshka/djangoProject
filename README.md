@@ -21,23 +21,23 @@ BookStore разработан для автоматизации работы б
 git clone https://github.com/Takumikkyshka/djangoProject.git
 cd django-bookstore
 
-2. Создание виртуального окружения
+3. Создание виртуального окружения
 python -m venv venv
 
-3. Активация виртуального окружения
+4. Активация виртуального окружения
 Windows:
 venv\Scripts\activate
 
-4. Установка зависимостей
+5. Установка зависимостей
 pip install -r requirements.txt
 
-5. Применение миграций
+6. Применение миграций
 python manage.py migrate
 
-6. Создание суперпользователя (опционально)
+7. Создание суперпользователя (опционально)
 python manage.py createsuperuser
 
-7. Запуск сервера
+8. Запуск сервера
 python manage.py runserver
 
 После запуска откройте браузер и перейдите по адресу:
