@@ -50,7 +50,8 @@ python manage.py runserver
 
 📊 Главная страница
 
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/4680b706-ae84-464d-967c-5cbd07e90d5a" />
+<img width="1893" height="922" alt="image" src="https://github.com/user-attachments/assets/2e94fe0d-7f12-4e2b-aabf-dd6f12b55d02" />
+
 
 Просматривайте общую статистику библиотеки:
 Количество авторов и книг
@@ -59,9 +60,18 @@ python manage.py runserver
 
 👥 Работа с авторами
 
+<img width="1903" height="921" alt="image" src="https://github.com/user-attachments/assets/3e7f77b0-2739-4b6f-b7dd-5397610b1529" />
+
+
 📚 Управление книгами
 
+<img width="1904" height="913" alt="image" src="https://github.com/user-attachments/assets/85ebd086-554a-40bf-8153-eecc6cca3f64" />
+
+
 ⚙️ Административная панель
+
+<img width="1915" height="690" alt="image" src="https://github.com/user-attachments/assets/58bda919-7724-4952-b70b-5f81f4ae1d2e" />
+
 
 Доступна по пути /admin/ предоставляет:
 Расширенное управление данными
