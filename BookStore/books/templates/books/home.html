@@ -1,0 +1,32 @@
+{% extends 'books/base.html' %}
+
+{% block title %}Главная - Библиотека книг{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 2rem 0;">
+    <h2>Добро пожаловать в нашу библиотеку!</h2>
+    <p>Управляйте коллекцией книг и авторов</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+    <div style="text-align: center; padding: 2rem; border: 1px solid #ddd; border-radius: 8px;">
+        <h3>Авторы</h3>
+        <p style="font-size: 2rem; font-weight: bold; color: #3498db;">{{ authors_count }}</p>
+        <p>авторов в библиотеке</p>
+        <div style="margin-top: 1rem;">
+            <a href="{% url 'books:author_list' %}" class="btn">Смотреть всех</a>
+            <a href="{% url 'books:author_create' %}" class="btn">Добавить автора</a>
+        </div>
+    </div>
+
+    <div style="text-align: center; padding: 2rem; border: 1px solid #ddd; border-radius: 8px;">
+        <h3>Книги</h3>
+        <p style="font-size: 2rem; font-weight: bold; color: #27ae60;">{{ books_count }}</p>
+        <p>книг в библиотеке</p>
+        <div style="margin-top: 1rem;">
+            <a href="{% url 'books:book_list' %}" class="btn">Смотреть все</a>
+            <a href="{% url 'books:book_create' %}" class="btn">Добавить книгу</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

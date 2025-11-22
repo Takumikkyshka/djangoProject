@@ -1,0 +1,53 @@
+{% extends 'books/base.html' %}
+
+{% block title %}{{ book.title }} - Библиотека книг{% endblock %}
+{% block header %}📖 {{ book.title }}{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 2rem;">
+    <div>
+        <h2>{{ book.title }}</h2>
+        <p style="color: #666; margin: 0.5rem 0;">
+            <strong>Автор:</strong> 
+            <a href="{% url 'books:author_detail' pk=book.author.pk %}" style="color: #3498db;">
+                {{ book.author.name }}
+            </a>
+        </p>
+        <p style="color: #666; margin: 0.5rem 0;">
+            <strong>Дата публикации:</strong> {{ book.published_date|date:"d.m.Y" }}
+        </p>
+        <p style="color: #666; margin: 0.5rem 0;">
+            <strong>ISBN:</strong> {{ book.isbn }}
+        </p>
+        <p style="color: #666; margin: 0.5rem 0;">
+            <strong>Количество страниц:</strong> {{ book.pages }}
+        </p>
+    </div>
+    <div style="display: flex; gap: 0.5rem;">
+        <a href="{% url 'books:book_edit' pk=book.pk %}" class="btn">✏️ Редактировать</a>
+        <a href="{% url 'books:book_delete' pk=book.pk %}" class="btn" style="background: #e74c3c;">🗑️ Удалить</a>
+        <a href="{% url 'books:book_list' %}" class="btn">← Назад к списку</a>
+    </div>
+</div>
+
+<!-- Если есть дополнительные поля, их можно добавить здесь -->
+
+<div style="margin-top: 2rem;">
+    <h3>Другие книги этого автора</h3>
+    {% with other_books=book.author.books.exclude pk=book.pk %}
+        {% if other_books %}
+            <ul style="list-style: none; padding: 0;">
+                {% for other_book in other_books %}
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                    <a href="{% url 'books:book_detail' pk=other_book.pk %}" style="text-decoration: none; color: #3498db;">
+                        {{ other_book.title }} ({{ other_book.published_date|date:"Y" }})
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="color: #666;">Других книг этого автора пока нет.</p>
+        {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}

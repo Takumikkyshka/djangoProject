@@ -1,0 +1,40 @@
+{% extends 'books/base.html' %}
+
+{% block title %}Удаление {{ object_type }} - Библиотека книг{% endblock %}
+{% block header %}🗑️ Удаление {{ object_type }}{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 2rem;">
+    <div style="font-size: 4rem; margin-bottom: 1rem;">⚠️</div>
+    <h2>Подтвердите удаление</h2>
+    <p style="font-size: 1.2rem; margin: 1rem 0;">
+        Вы действительно хотите удалить 
+        <strong>
+            {% if object_type == 'автор' %}
+                автора "{{ object.name }}"?
+            {% elif object_type == 'книга' %}
+                книгу "{{ object.title }}"?
+            {% else %}
+                этот объект?
+            {% endif %}
+        </strong>
+    </p>
+    
+    {% if object_type == 'автор' and object.books.exists %}
+    <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1rem; border-radius: 4px; margin: 1rem 0;">
+        <strong>Внимание!</strong> При удалении автора также будут удалены все его книги ({{ object.books.count }} шт.)
+    </div>
+    {% endif %}
+    
+    <form method="post" style="margin: 2rem 0;">
+        {% csrf_token %}
+        <button type="submit" class="btn" style="background: #e74c3c; font-size: 1.2rem; padding: 1rem 2rem;">
+            ✅ Да, удалить
+        </button>
+    </form>
+    
+    <a href="{% url 'books:home' %}" class="btn" style="background: #95a5a6;">
+        ❌ Отмена
+    </a>
+</div>
+{% endblock %}

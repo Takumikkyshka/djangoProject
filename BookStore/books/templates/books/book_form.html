@@ -1,0 +1,37 @@
+{% extends 'books/base.html' %}
+
+{% block title %}{{ title|default:"Форма книги" }} - Библиотека книг{% endblock %}
+{% block header %}{{ title|default:"Форма книги" }}{% endblock %}
+
+{% block content %}
+<form method="post" style="max-width: 600px;">
+    {% csrf_token %}
+    
+    {% for field in form %}
+    <div style="margin-bottom: 1rem;">
+        <label for="{{ field.id_for_label }}" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">
+            {{ field.label }}
+        </label>
+        {{ field }}
+        {% if field.help_text %}
+        <div style="color: #666; font-size: 0.9rem; margin-top: 0.25rem;">{{ field.help_text }}</div>
+        {% endif %}
+        {% for error in field.errors %}
+        <div style="color: #e74c3c; font-size: 0.9rem; margin-top: 0.25rem;">{{ error }}</div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    
+    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+        <button type="submit" class="btn">
+            💾 {{ submit_text|default:"Сохранить" }}
+        </button>
+        
+        {% if book %}
+            <a href="{% url 'books:book_detail' pk=book.pk %}" class="btn" style="background: #95a5a6;">❌ Отмена</a>
+        {% else %}
+            <a href="{% url 'books:book_list' %}" class="btn" style="background: #95a5a6;">❌ Отмена</a>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

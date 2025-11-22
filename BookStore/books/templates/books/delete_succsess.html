@@ -1,0 +1,23 @@
+{% extends 'books/base.html' %}
+
+{% block title %}Удалено - Библиотека книг{% endblock %}
+{% block header %}✅ Успешно удалено{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 3rem;">
+    <div style="font-size: 4rem; margin-bottom: 1rem;">✅</div>
+    <h2>Удаление завершено</h2>
+    <p style="font-size: 1.2rem; margin: 1rem 0;">
+        {{ object_type|capfirst }} <strong>"{{ object_name }}"</strong> был успешно удален.
+    </p>
+    
+    <div style="margin-top: 2rem;">
+        <a href="{% url 'books:home' %}" class="btn">🏠 На главную</a>
+        {% if object_type == 'автор' %}
+            <a href="{% url 'books:author_list' %}" class="btn">👥 К списку авторов</a>
+        {% elif object_type == 'книга' %}
+            <a href="{% url 'books:book_list' %}" class="btn">📖 К списку книг</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

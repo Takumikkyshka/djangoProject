@@ -1,0 +1,51 @@
+{% extends 'books/base.html' %}
+
+{% block title %}Авторы - Библиотека книг{% endblock %}
+{% block header %}👥 Все авторы{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h2>Список авторов</h2>
+    <a href="{% url 'books:author_create' %}" class="btn">➕ Добавить автора</a>
+</div>
+
+{% if authors %}
+    <ul style="list-style: none; padding: 0;">
+        {% for author in authors %}
+        <li style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 style="margin: 0;">
+                    <a href="{% url 'books:author_detail' pk=author.pk %}" style="text-decoration: none; color: #2c3e50;">
+                        {{ author.name }}
+                    </a>
+                </h3>
+                {% if author.birth_date %}
+                <p style="margin: 0.25rem 0; color: #666;">
+                    🎂 {{ author.birth_date|date:"d.m.Y" }}
+                </p>
+                {% endif %}
+                {% if author.bio %}
+                <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;">
+                    {{ author.bio|truncatewords:20 }}
+                </p>
+                {% endif %}
+                <p style="margin: 0.25rem 0; color: #3498db; font-size: 0.9rem;">
+                    📚 Книг: {{ author.books.count }}
+                </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <a href="{% url 'books:author_detail' pk=author.pk %}" class="btn" style="padding: 5px 10px; font-size: 0.9rem;">👁️ Просмотр</a>
+                <a href="{% url 'books:author_edit' pk=author.pk %}" class="btn" style="padding: 5px 10px; font-size: 0.9rem;">✏️ Редактировать</a>
+                <a href="{% url 'books:author_delete' pk=author.pk %}" class="btn" style="padding: 5px 10px; font-size: 0.9rem; background: #e74c3c;">🗑️ Удалить</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div style="text-align: center; padding: 3rem; color: #666;">
+        <h3>Пока нет авторов</h3>
+        <p>Добавьте первого автора в библиотеку</p>
+        <a href="{% url 'books:author_create' %}" class="btn">➕ Добавить автора</a>
+    </div>
+{% endif %}
+{% endblock %}

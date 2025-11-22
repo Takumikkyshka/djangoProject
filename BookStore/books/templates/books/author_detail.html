@@ -1,0 +1,67 @@
+{% extends 'books/base.html' %}
+
+{% block title %}{{ author.name }} - Библиотека книг{% endblock %}
+{% block header %}👥 {{ author.name }}{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 2rem;">
+    <div>
+        <h2>{{ author.name }}</h2>
+        {% if author.birth_date %}
+        <p style="color: #666; margin: 0.5rem 0;">
+            <strong>Дата рождения:</strong> {{ author.birth_date|date:"d.m.Y" }}
+        </p>
+        {% endif %}
+    </div>
+    <div style="display: flex; gap: 0.5rem;">
+        <a href="{% url 'books:author_edit' pk=author.pk %}" class="btn">✏️ Редактировать</a>
+        <a href="{% url 'books:author_delete' pk=author.pk %}" class="btn" style="background: #e74c3c;">🗑️ Удалить</a>
+        <a href="{% url 'books:author_list' %}" class="btn">← Назад к списку</a>
+    </div>
+</div>
+
+{% if author.bio %}
+<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+    <h3>Биография</h3>
+    <p style="line-height: 1.6; white-space: pre-line;">{{ author.bio }}</p>
+</div>
+{% endif %}
+
+<!-- Книги автора -->
+<div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="margin: 0;">Книги автора</h3>
+        <a href="{% url 'books:book_create' %}" class="btn">➕ Добавить книгу</a>
+    </div>
+
+    {% if books %}
+        <ul style="list-style: none; padding: 0;">
+            {% for book in books %}
+            <li style="padding: 1rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h4 style="margin: 0;">
+                        <a href="{% url 'books:book_detail' pk=book.pk %}" style="text-decoration: none; color: #2c3e50;">
+                            {{ book.title }}
+                        </a>
+                    </h4>
+                    <p style="margin: 0.25rem 0; color: #666;">
+                        📅 {{ book.published_date|date:"Y" }} 
+                        | 📄 {{ book.pages }} стр.
+                        | 🔢 ISBN: {{ book.isbn }}
+                    </p>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="{% url 'books:book_detail' pk=book.pk %}" class="btn" style="padding: 5px 10px; font-size: 0.9rem;">👁️ Просмотр</a>
+                    <a href="{% url 'books:book_edit' pk=book.pk %}" class="btn" style="padding: 5px 10px; font-size: 0.9rem;">✏️ Редактировать</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div style="text-align: center; padding: 2rem; color: #666;">
+            <p>У этого автора пока нет книг</p>
+            <a href="{% url 'books:book_create' %}" class="btn">➕ Добавить книгу</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
