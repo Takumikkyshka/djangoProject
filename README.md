@@ -70,6 +70,7 @@ python manage.py runserver
 
 📁 Структура проекта
 
+```
 django-bookstore/
 ├── BookStore/                 # Корневая конфигурация Django
 │   ├── settings.py           # Настройки проекта
@@ -95,6 +96,7 @@ django-bookstore/
 ├── requirements.txt         # Зависимости проекта
 ├── manage.py               # Утилита управления Django
 └── README.md               # Документация
+```
 
 
 📋 Требования
