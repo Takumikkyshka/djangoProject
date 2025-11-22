@@ -110,4 +110,4 @@ Python: 3.13 или выше
 
 Максим Савченко - Full-stack разработчик
 📧 Email: savchenkomaxim82@gmail.com
-🔗 GitHub: @Takumikkyshka
+🔗 GitHub: [@Takumikkyshka](https://github.com/Takumikkyshka)
