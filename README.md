@@ -18,8 +18,10 @@ BookStore разработан для автоматизации работы б
 ⭐ Установка и запуск
 
 1. Клонирование репозитория
+``` bash
 git clone https://github.com/Takumikkyshka/djangoProject.git
 cd django-bookstore
+```
 
 3. Создание виртуального окружения
 python -m venv venv
